@@ -15,12 +15,20 @@ const addTask = () => {
 
         let span = document.createElement('span'); //close button
         span.innerHTML = "\u00d7";
-        span.classList.add('close-button');
+        span.classList.add('close-button'); //giving class name to span
         li.appendChild(span);
     }
     inputBox.value = " "; //to clear the previous input given by the user from input field
     saveData();
 }
+
+ //Entering task on clicking enter key
+inputBox.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();  // prevent the form from submitting or adding a newline character
+      addTask();
+    }
+  });
 
 // Marking complete a task and cancelling/removing a task
 listContainer.addEventListener('click', (event) => {
@@ -32,7 +40,7 @@ listContainer.addEventListener('click', (event) => {
 
     }
     else if (tagName === 'SPAN') {
-        event.target.parentElement.remove();
+        event.target.parentElement.remove(); //removes parent element : li tag
         saveData();
 
     }
